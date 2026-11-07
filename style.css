@@ -97,6 +97,16 @@ a:hover { color: var(--accent); }
 }
 .wordmark:hover { color: var(--ink); }
 
+.brand-tile {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  margin-right: 9px;
+  display: inline-block;
+  vertical-align: -4px;
+  border: 1px solid var(--hairline);
+}
+
 .cursor {
   display: inline-block;
   width: 8px;
@@ -268,6 +278,15 @@ a:hover { color: var(--accent); }
 .section-close a { color: var(--ink); font-weight: 500; }
 .section-close a:hover { color: var(--accent); }
 
+.balance {
+  margin-top: 16px;
+  font-family: var(--mono);
+  font-size: 13.5px;
+  line-height: 2.1;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+
 /* philosophy points */
 
 .points {
@@ -331,38 +350,7 @@ a:hover { color: var(--accent); }
   color: var(--ink);
 }
 
-.product-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 56px;
-  margin-top: 48px;
-}
-
-.subhead {
-  font-family: var(--mono);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  margin-bottom: 16px;
-}
-
-.features {
-  list-style: none;
-}
-
-.features li {
-  padding: 9px 0;
-  border-bottom: 1px solid var(--hairline);
-  font-size: 15.5px;
-}
-
-.features li::before {
-  content: "+ ";
-  font-family: var(--mono);
-  color: var(--accent);
-}
+/* product card — one glance, one row */
 
 .mono-note {
   font-family: var(--mono);
@@ -371,7 +359,48 @@ a:hover { color: var(--accent); }
   color: var(--ink-soft);
 }
 
-.product-grid .cta-row { margin-top: 22px; }
+.product-card {
+  margin-top: 36px;
+  border: 1px solid var(--hairline);
+  border-radius: 18px;
+  padding: 26px 28px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 26px;
+  align-items: center;
+  background: color-mix(in srgb, var(--chip-bg) 55%, transparent);
+}
+
+.p-logo {
+  width: 84px;
+  height: 84px;
+  border-radius: 20px;
+  border: 1px solid var(--hairline);
+  display: block;
+}
+
+.p-info { min-width: 0; }
+
+.p-desc { font-size: 1.08rem; font-weight: 550; }
+
+.p-info .chips { margin-top: 12px; }
+.p-info .mono-note { margin-top: 12px; font-size: 12.5px; }
+
+.p-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.p-actions .btn { text-align: center; }
+
+.p-inside {
+  margin-top: 18px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
 
 /* ---------- ladder ---------- */
 
@@ -449,27 +478,42 @@ a:hover { color: var(--accent); }
 
 /* ---------- footer ---------- */
 
+/* Fixed dark surface (theme-independent): this is where the no-background
+   white logo lives. A brand anchor, not a theme color. */
+
 .site-footer {
   margin-top: 130px;
-  border-top: 1px solid var(--hairline);
-  padding: 34px 0 44px;
+  background: #121210;
+  border-top: 1px solid rgba(236, 236, 231, 0.14);
+  padding: 46px 0 54px;
 }
 
 .footer-inner {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  gap: 20px;
+  align-items: center;
+  gap: 28px;
   flex-wrap: wrap;
 }
 
-.footer-inner p { font-size: 14.5px; color: var(--ink-soft); }
+.footer-mark {
+  width: 92px;
+  height: 92px;
+  display: block;
+}
+
+.footer-text p { font-size: 14.5px; color: #B9B9B0; }
+.footer-text .mono-note { color: #8A8A81; }
+.footer-text a { color: #ECECE7; }
+.footer-text a:hover { color: #52C97E; }
 
 /* ---------- responsive ---------- */
 
 @media (max-width: 760px) {
   .spec-strip { grid-template-columns: repeat(2, 1fr); }
-  .product-grid { grid-template-columns: 1fr; gap: 40px; }
+  .product-card { grid-template-columns: 1fr; gap: 18px; padding: 22px; }
+  .p-logo { width: 64px; height: 64px; }
+  .p-actions { flex-direction: row; flex-wrap: wrap; }
   .points li, .ladder li { grid-template-columns: 44px 1fr; }
   .contact-list li { grid-template-columns: 1fr; gap: 4px; }
 }
@@ -481,4 +525,6 @@ a:hover { color: var(--accent); }
   .founding p { font-size: 1.22rem; }
   body { font-size: 16px; }
   .section { margin-top: 88px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 18px; }
+  .footer-mark { width: 68px; height: 68px; }
 }
