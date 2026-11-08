@@ -97,14 +97,19 @@ a:hover { color: var(--accent); }
 }
 .wordmark:hover { color: var(--ink); }
 
-.brand-tile {
-  width: 22px;
-  height: 22px;
-  border-radius: 6px;
-  margin-right: 9px;
+/* Transparent brand mark, no tile — dark strokes on light, white on dark. */
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
   display: inline-block;
-  vertical-align: -4px;
-  border: 1px solid var(--hairline);
+}
+
+.brand-mark--light { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .brand-mark--dark { display: none; }
+  .brand-mark--light { display: inline-block; }
 }
 
 .cursor {
