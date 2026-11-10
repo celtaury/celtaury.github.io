@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cura Privacy Policy — Celtaury</title>
+  <meta name="description" content="Privacy policy for Cura, the Android phone cleaner that cannot connect to the internet on its own. No data collected, no data shared, no ads, no trackers.">
+  <meta name="theme-color" content="#FAFAF7">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010">
+
+  <link rel="canonical" href="https://celtaury.github.io/privacy.html">
+
+  <!-- Open Graph: link previews on WhatsApp, Discord, X -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://celtaury.github.io/privacy.html">
+  <meta property="og:title" content="Cura Privacy Policy — Celtaury">
+  <meta property="og:description" content="Cura can't phone home: no data collected, no data shared, no ads, no trackers, no INTERNET permission.">
+
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* page-local styles, following the "minima" system — no style.css changes needed */
+    .prose { margin-top: 24px; max-width: 38rem; }
+    .prose p { margin-top: 16px; }
+    .prose p:first-child { margin-top: 0; }
+    .prose strong { font-weight: 650; }
+
+    .perm-list { list-style: none; margin-top: 44px; }
+    .perm-list li {
+      padding: 20px 0;
+      border-top: 1px solid var(--hairline);
+      display: grid;
+      grid-template-columns: minmax(210px, 330px) 1fr;
+      gap: 18px;
+      font-size: 1.02rem;
+      align-items: baseline;
+    }
+    .perm-code {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      letter-spacing: 0.03em;
+      color: var(--accent);
+      word-break: break-word;
+      padding-top: 5px;
+    }
+    .perm-code--none { color: var(--ink-soft); }
+    @media (max-width: 640px) {
+      .perm-list li { grid-template-columns: 1fr; gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="wordmark" href="/"><img class="brand-mark brand-mark--dark" src="assets/logo-dark.png" alt="" width="40" height="40"><img class="brand-mark brand-mark--light" src="assets/logo-white.png" alt="" width="40" height="40">celtaury<span class="cursor" aria-hidden="true"></span></a>
+      <nav class="nav" aria-label="Main">
+        <a href="/#philosophy">Philosophy</a>
+        <a href="/#products">Products</a>
+        <a href="/#support">Support</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+      <a class="btn btn-small" href="https://github.com/celtaury/cura/releases/latest">Get Cura</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ TITLE ============ -->
+    <section class="hero">
+      <div class="wrap">
+        <p class="kicker">Legal &mdash; cura for android</p>
+        <h1>Privacy policy.</h1>
+        <p class="lede">
+          The whole truth, in fewer words than a cookie banner.
+        </p>
+        <p class="mono-note" style="margin-top: 20px;">
+          last updated: 10 november 2026 &middot; covers all versions of cura
+        </p>
+      </div>
+      <div class="wrap">
+        <dl class="spec-strip" aria-label="Cura data at a glance">
+          <div><dt>data collected</dt><dd class="ok">none</dd></div>
+          <div><dt>data shared</dt><dd class="ok">none</dd></div>
+          <div><dt>leaves your device</dt><dd class="ok">nothing on its own</dd></div>
+          <div><dt>internet permission</dt><dd class="ok">none</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============ 01 SCOPE ============ -->
+    <section class="section" id="scope">
+      <div class="wrap">
+        <p class="section-index">01 &mdash; Scope</p>
+        <h2>This page is about Cura.</h2>
+        <div class="prose">
+          <p>
+            This policy applies specifically to <strong>Cura</strong>, the Android phone cleaner
+            built by <strong>Celtaury</strong>, an independent software company based in Indonesia.
+            It covers every place Cura is distributed: Google Play, GitHub Releases, and any
+            direct APK we publish.
+          </p>
+          <p>
+            It explains what Cura does on your device, what never leaves it on its own, and who
+            we share anything with (nobody). Future Celtaury products will publish their own policies,
+            linked from this site &mdash; this page deliberately does not speak for them.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 02 SHORT VERSION ============ -->
+    <section class="section" id="short-version">
+      <div class="wrap">
+        <p class="section-index">02 &mdash; The short version</p>
+        <h2>Cura can&rsquo;t phone home.</h2>
+        <div class="prose">
+          <p>
+            The strongest guarantee on this page isn&rsquo;t a promise &mdash; it&rsquo;s architecture.
+            Cura does <strong>not request the INTERNET permission</strong>, and Android enforces that
+            at the operating-system level: the app <strong>cannot connect to the internet on its
+            own</strong>. No photo, no file, no statistic, no identifier can be sent from Cura to us
+            or to anyone else.
+          </p>
+          <p>
+            Two things sit outside that guarantee, both spelled out below: Android&rsquo;s automatic
+            backup (section 04) and links you choose to open yourself (section 05).
+          </p>
+          <p>
+            There are no accounts and no sign-ups. There is no analytics SDK, no crash-reporting
+            service, no advertising, no tracking of any kind, and no affiliate links inside the app.
+            Every claim here is verifiable, because Cura is open source under the Apache-2.0 license:
+            the complete code lives at
+            <a href="https://github.com/celtaury/cura">github.com/celtaury/cura</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 03 PERMISSIONS ============ -->
+    <section class="section" id="permissions">
+      <div class="wrap">
+        <p class="section-index">03 &mdash; Permissions</p>
+        <h2>What Cura asks for, and why.</h2>
+        <p class="section-intro">
+          Cura reads files only to show you what might be worth cleaning, and deletes only
+          what you approve. It requests storage-related permissions &mdash; and nothing else.
+        </p>
+        <ul class="perm-list">
+          <li>
+            <span class="perm-code">READ_MEDIA_IMAGES<br>READ_MEDIA_VIDEO<br><span style="color: var(--ink-soft);">android 13+</span></span>
+            <p>Scans your gallery for old screenshots, duplicates, WhatsApp leftovers and large files, so it can suggest what to clean.</p>
+          </li>
+          <li>
+            <span class="perm-code">READ_MEDIA_AUDIO<br><span style="color: var(--ink-soft);">android 13+</span></span>
+            <p>The same scan, for audio files.</p>
+          </li>
+          <li>
+            <span class="perm-code">READ_MEDIA_VISUAL_USER_SELECTED<br><span style="color: var(--ink-soft);">android 14+</span></span>
+            <p>Lets you grant Cura access to only the photos you choose, instead of the whole library.</p>
+          </li>
+          <li>
+            <span class="perm-code">READ_EXTERNAL_STORAGE<br><span style="color: var(--ink-soft);">android 12 and below</span></span>
+            <p>The older storage permission, requested only on older Android versions.</p>
+          </li>
+          <li>
+            <span class="perm-code perm-code--none">INTERNET &mdash; not requested</span>
+            <p>The absence of this permission is the guarantee in section 02. You can confirm it yourself: Android Settings &rarr; Apps &rarr; Cura &rarr; Permissions, or check the manifest on GitHub.</p>
+          </li>
+        </ul>
+        <p class="section-close">
+          All permissions are granted by you in Android and can be revoked at any time from
+          Android Settings &rarr; Apps &rarr; Cura &rarr; Permissions. Without them Cura simply
+          can&rsquo;t scan &mdash; it will never try to compensate by other means.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 04 STORAGE ============ -->
+    <section class="section" id="storage">
+      <div class="wrap">
+        <p class="section-index">04 &mdash; Storage &amp; deletion</p>
+        <h2>Everything stays on your side.</h2>
+        <div class="prose">
+          <p>
+            Cura keeps scan results and your saved stats in the app&rsquo;s private storage,
+            on your device, inside Android&rsquo;s sandbox. We never receive a copy of any of it
+            &mdash; there is no server on our side to receive one.
+          </p>
+          <p>
+            One exception, spelled out honestly: <strong>automatic backup is switched on</strong>
+            for Cura. Your device may include Cura&rsquo;s local data &mdash; its small database of
+            scan results and settings &mdash; in Android backups made to <strong>your own Google
+            account</strong>, or in a direct device-to-device transfer when you move to a new
+            phone. Those backups are managed by Google and Android under their own policies;
+            Celtaury never receives a copy, and a backup never contains your photos or files
+            &mdash; only Cura&rsquo;s own stats and settings. You can turn backup off in your
+            device settings at any time.
+          </p>
+          <p>
+            Deleting Cura removes all of it on your device permanently. Nothing survives on our
+            servers &mdash; because there are none. Want a deletion request on record anyway?
+            Email us or open a GitHub issue, and we&rsquo;ll confirm in writing that we hold
+            nothing about you.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 05 SHARING ============ -->
+    <section class="section" id="sharing">
+      <div class="wrap">
+        <p class="section-index">05 &mdash; Sharing</p>
+        <h2>We share your data with no one.</h2>
+        <div class="prose">
+          <p>
+            No ad networks, no analytics providers, no data brokers, no social platforms.
+            Cura has no way to send data to any of them, so there is no third party to list.
+          </p>
+          <p>
+            The one situation where data leaves the app is entirely yours: if you tap a link to an
+            external website &mdash; for example our donation page or the GitHub repository &mdash;
+            your browser opens that site directly. Cura sends nothing beyond the visit you chose to
+            make, and those websites are operated by third parties under their own privacy policies,
+            not this one.
+          </p>
+          <p>
+            One boundary, so nothing here contradicts itself: this policy covers Cura, not the
+            stores it lives on. Google Play and GitHub collect and process their own data under
+            their own policies &mdash; for example, Google Play shows us aggregate crash statistics
+            and install counts for people who opted in to sharing usage &amp; diagnostics with
+            Google. Those platforms never hand your personal data to us.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 06 YOUR RIGHTS ============ -->
+    <section class="section" id="rights">
+      <div class="wrap">
+        <p class="section-index">06 &mdash; Your rights</p>
+        <h2>Your rights, stated plainly.</h2>
+        <div class="prose">
+          <p>
+            Laws like the GDPR and Indonesia&rsquo;s Personal Data Protection Law give you rights to
+            access, correct, export and delete your personal data. We satisfy all of them the short
+            way: <strong>Celtaury holds no personal data about anyone</strong>, so there is nothing
+            for us to hand over, correct, or delete. Deleting Cura erases everything instantly and
+            permanently.
+          </p>
+          <p>
+            If you contact us anyway, we will confirm in writing that we hold nothing about you
+            &mdash; and help however we can.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 07 CHILDREN ============ -->
+    <section class="section" id="children">
+      <div class="wrap">
+        <p class="section-index">07 &mdash; Children</p>
+        <h2>Nothing to collect, from anyone.</h2>
+        <div class="prose">
+          <p>
+            Cura is not directed at children under 13 (or the equivalent minimum age in your
+            jurisdiction), and it does not ask for an age, a name, contact details, or any other
+            personal information &mdash; from children or from anyone else. Since the app collects
+            no data at all, it cannot collect children&rsquo;s data.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 08 CHANGES ============ -->
+    <section class="section" id="changes">
+      <div class="wrap">
+        <p class="section-index">08 &mdash; Changes</p>
+        <h2>If this ever changes, you&rsquo;ll know first.</h2>
+        <div class="prose">
+          <p>
+            If a future version of Cura ever requires a new permission or a different approach to
+            data, we will update this page and the date above <strong>before</strong> that version
+            is released, and explain the change in the release notes. Between updates, the
+            open-source repository remains the source of truth.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 09 CONTACT ============ -->
+    <section class="section" id="contact">
+      <div class="wrap">
+        <p class="section-index">09 &mdash; Contact</p>
+        <h2>Questions? Ask.</h2>
+        <p class="section-intro">
+          The fastest route is a GitHub issue, but a plain email works too.
+        </p>
+        <ul class="contact-list">
+          <!-- TODO: replace the placeholder email below with your real developer
+               email (the same one you set as Play Console developer email)
+               before publishing. -->
+          <li><span class="contact-label">Email</span><a href="mailto:privacy@celtaury.example">privacy@celtaury.example</a></li>
+          <li><span class="contact-label">Issues</span><a href="https://github.com/celtaury/cura/issues">github.com/celtaury/cura/issues</a></li>
+          <li><span class="contact-label">Founder</span><a href="https://github.com/Kimiberlianoputra">Kimi &mdash; Founder &amp; Developer</a></li>
+          <li><span class="contact-label">Company</span><span>Celtaury &mdash; independent software company, Indonesia</span></li>
+          <li><span class="contact-label">Source</span><a href="https://github.com/celtaury/cura">Cura is open source &mdash; apache-2.0</a></li>
+        </ul>
+        <p class="section-close">
+          Every suggestion gets built &mdash; or gets a reason. Questions about this policy
+          get the same treatment.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <p class="redlines" aria-label="Policy summary">
+          collected: none &nbsp;&middot;&nbsp; shared: none &nbsp;&middot;&nbsp; our servers: none &nbsp;&middot;&nbsp; connects on its own: never
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <img class="footer-mark" src="assets/logo-white.png" alt="Celtaury logo" width="92" height="92">
+      <div class="footer-text">
+        <p>&copy; 2026 Celtaury &mdash; built with care and a lot of sleep debt.</p>
+        <p class="mono-note">this page: no javascript &middot; no cookies &middot; no third-party requests</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
