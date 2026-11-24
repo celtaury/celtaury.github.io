@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Earning-O-Meter — Celtaury's open books</title>
+  <meta name="description" content="Every rupiah Celtaury earns and spends, published in public. Currently: one founder's loan, zero income, 0% to the first $50 goal. No JavaScript, no tracking — just an honest table.">
+  <meta name="theme-color" content="#FAFAF7">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010">
+
+  <!-- Open Graph: link previews on WhatsApp, Discord, X -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://celtaury.github.io/earning-o-meter.html">
+  <meta property="og:title" content="The Earning-O-Meter — Celtaury's open books">
+  <meta property="og:description" content="Every rupiah in and out, published where anyone can check. Day zero: one founder's loan, zero income. Watch it from here.">
+  <meta property="og:image" content="https://celtaury.github.io/assets/og-cover.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ---------- earning-o-meter page additions (no JS, no third-party) ---------- */
+
+    /* the meter */
+    .meter-shell { margin-top: 44px; max-width: 40rem; }
+
+    .meter-track {
+      position: relative;
+      height: 34px;
+      border: 1px solid var(--hairline);
+      border-radius: 999px;
+      background: var(--chip-bg);
+    }
+
+    .meter-fill {
+      position: absolute;
+      top: 0; bottom: 0; left: 0;
+      width: 0%; /* honest zero: no money has landed yet */
+      background: var(--accent);
+      border-radius: 999px;
+    }
+
+    .meter-tick {
+      position: absolute;
+      top: -7px; bottom: -7px;
+      left: 50%;
+      border-left: 2px dashed var(--ink-soft);
+    }
+
+    .meter-labels {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+    .meter-labels .l-start { text-align: left; }
+    .meter-labels .l-mid   { text-align: center; max-width: 17ch; }
+    .meter-labels .l-end   { text-align: right; }
+    .meter-labels strong { color: var(--ink); font-weight: 600; }
+
+    .meter-readout {
+      margin-top: 26px;
+      font-family: var(--mono);
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+    }
+    .meter-readout .ok { color: var(--accent); font-weight: 700; }
+
+    /* the ledger table */
+    .table-scroll {
+      margin-top: 40px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+    }
+
+    .ledger {
+      width: 100%;
+      min-width: 560px;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+
+    .ledger th {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: left;
+      color: var(--ink-soft);
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--hairline);
+      white-space: nowrap;
+    }
+
+    .ledger td {
+      padding: 16px;
+      border-bottom: 1px solid var(--hairline);
+      vertical-align: top;
+    }
+
+    .ledger td.num {
+      font-family: var(--mono);
+      font-size: 13.5px;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .ledger .in  { color: var(--accent); font-weight: 700; }
+    .ledger .sub {
+      display: block;
+      margin-top: 4px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+
+    .ledger td.empty-row {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      text-align: center;
+      padding: 14px 16px;
+    }
+
+    .foot-note {
+      margin-top: 18px;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      line-height: 1.9;
+      color: var(--ink-soft);
+      max-width: 44rem;
+    }
+
+    /* sources */
+    .source-grid {
+      margin-top: 44px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+      max-width: 44rem;
+    }
+
+    .source-card {
+      border: 1px solid var(--hairline);
+      border-radius: 14px;
+      padding: 22px 24px;
+      background: color-mix(in srgb, var(--chip-bg) 55%, transparent);
+    }
+
+    .source-card h3 {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 14px;
+    }
+
+    .source-card .chips { margin-top: 0; }
+
+    .source-card p {
+      margin-top: 16px;
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+    }
+
+    #sources .cta-row { margin-top: 30px; }
+
+    /* hero tweak for a subpage */
+    .hero { padding-bottom: 8px; }
+
+    @media (max-width: 760px) {
+      .meter-labels { grid-template-columns: 1fr; gap: 6px; }
+      .meter-labels .l-start, .meter-labels .l-mid, .meter-labels .l-end { text-align: left; max-width: none; }
+      .meter-labels .l-mid { order: 3; }
+      .source-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="wordmark" href="index.html"><img class="brand-mark brand-mark--dark" src="assets/logo-dark.png" alt="" width="40" height="40"><img class="brand-mark brand-mark--light" src="assets/logo-white.png" alt="" width="40" height="40">celtaury<span class="cursor" aria-hidden="true"></span></a>
+      <nav class="nav" aria-label="Page">
+        <a href="#meter">Meter</a>
+        <a href="#ledger">Ledger</a>
+        <a href="#sources">Sources</a>
+        <a href="#rules">Rules</a>
+      </nav>
+      <a class="btn btn-small" href="https://github.com/celtaury/cura/releases/latest">Get Cura</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="wrap">
+        <p class="kicker">Open books &middot; Celtaury point 02</p>
+        <h1>The earning&#8209;o&#8209;meter.</h1>
+        <p class="lede">
+          Point 02 says our earnings and expenses are transparent &mdash; every source,
+          every milestone, all public. This page is that promise with numbers on it.
+          No spreadsheet to request, no &ldquo;contact us for details.&rdquo; It&rsquo;s all right here.
+        </p>
+        <div class="cta-row">
+          <a class="btn" href="#meter">See the meter</a>
+          <a class="btn btn-ghost" href="index.html">&larr; Back to the site</a>
+        </div>
+      </div>
+      <div class="wrap">
+        <dl class="spec-strip" aria-label="Books at a glance">
+          <div><dt>income so far</dt><dd class="ok">Rp 0</dd></div>
+          <div><dt>spent so far</dt><dd>Rp 454,560* &middot; $25.00</dd></div>
+          <div><dt>balance</dt><dd>&minus;Rp 454,560*</dd></div>
+          <div><dt>last updated</dt><dd>24 nov 2026</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============ FOUNDING ============ -->
+    <section class="founding">
+      <div class="wrap">
+        <p>
+          Celtaury became a real company on 24 November 2026.
+          The books open with one expense, zero income, and a founder&rsquo;s loan.
+          Day zero &mdash; watch it from here.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 01 METER ============ -->
+    <section class="section" id="meter">
+      <div class="wrap">
+        <p class="section-index">01 &mdash; The meter</p>
+        <h2>Progress to the first goal.</h2>
+        <p class="section-intro">
+          The first goal is $50 &mdash; about Rp 909,120. That covers paying the founder&rsquo;s
+          loan back and funding the AI subscriptions for building the next app.
+          The needle moves when money actually lands in Saweria or Ko-fi &mdash; not before.
+          Right now it reads 0%, because that is the truth.
+        </p>
+
+        <div class="meter-shell" role="img" aria-label="Earnings meter: 0 of 50 dollars reached, break-even marker at the halfway point">
+          <div class="meter-track">
+            <div class="meter-fill"></div>
+            <div class="meter-tick"></div>
+          </div>
+          <div class="meter-labels">
+            <span class="l-start"><strong>Rp 0</strong><br>you are here</span>
+            <span class="l-mid"><strong>break-even</strong> &middot; $25<br>Rp 454,560* &mdash; loan paid back</span>
+            <span class="l-end"><strong>$50 goal</strong><br>Rp 909,120* &mdash; AI subs funded</span>
+          </div>
+        </div>
+
+        <p class="meter-readout">$0.00 of $50.00 <span class="ok">&middot; 0%</span> &middot; Rp 0 of Rp 909,120*</p>
+      </div>
+    </section>
+
+    <!-- ============ 02 LEDGER ============ -->
+    <section class="section" id="ledger">
+      <div class="wrap">
+        <p class="section-index">02 &mdash; The ledger</p>
+        <h2>Every rupiah, in and out.</h2>
+        <p class="section-intro">
+          One table, nothing rounded away. Rows marked with an asterisk (*) are estimates
+          at a stated exchange rate; they get replaced by the real number as soon as a
+          receipt or bank statement confirms it.
+        </p>
+
+        <div class="table-scroll">
+          <table class="ledger">
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">What</th>
+                <th scope="col">In</th>
+                <th scope="col">Out</th>
+                <th scope="col">Balance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="num">2026&#8209;11&#8209;08</td>
+                <td>Google Play Console &mdash; developer registration
+                  <span class="sub">the one-time fee that opened the Play Store for Cura</span>
+                </td>
+                <td class="num">&mdash;</td>
+                <td class="num">$25.00*</td>
+                <td class="num">&minus;Rp 454,560*<br>(&minus;$25.00)</td>
+              </tr>
+              <tr>
+                <td class="empty-row" colspan="5">next row: reserved for the first rupiah in</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="foot-note">
+          * Recorded at Rp 18,182 per USD (mid-market rate, xe.com, 24 Nov 2026).
+          Google charged USD 25.00; the exact rupiah amount on the card statement may differ
+          slightly. When the statement arrives, the estimate comes off and any correction is
+          logged in the row &mdash; never hidden.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 03 SOURCES ============ -->
+    <section class="section" id="sources">
+      <div class="wrap">
+        <p class="section-index">03 &mdash; Sources</p>
+        <h2>Where money can come from, and go.</h2>
+
+        <div class="source-grid">
+          <div class="source-card">
+            <h3>In &mdash; allowed sources</h3>
+            <ul class="chips" aria-label="Income sources">
+              <li>saweria &mdash; live</li>
+              <li>ko-fi &mdash; coming</li>
+              <li>pro unlocks &mdash; later</li>
+              <li>memberships &mdash; later</li>
+            </ul>
+            <p>Every rupiah that lands shows up on the ledger within a day, with its source named.</p>
+          </div>
+          <div class="source-card">
+            <h3>Out &mdash; recorded expenses</h3>
+            <ul class="chips" aria-label="Expense types">
+              <li>play console fee &mdash; paid</li>
+              <li>ai subscriptions &mdash; planned</li>
+              <li>anything else &mdash; needs a receipt</li>
+            </ul>
+            <p>Expenses appear the day they happen, with the date and what they bought in the row.</p>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn" href="https://saweria.co/Kymigaming">Saweria &mdash; be the first row</a>
+          <a class="btn btn-ghost" href="index.html#support">Read the money plan</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 RULES ============ -->
+    <section class="section" id="rules">
+      <div class="wrap">
+        <p class="section-index">04 &mdash; Rules</p>
+        <h2>How to read this page.</h2>
+        <ol class="points">
+          <li>
+            <p><strong>Updated by hand, in public.</strong>
+            Every change is a commit anyone can diff. No silent edits &mdash; corrections stay in the history.</p>
+          </li>
+          <li>
+            <p><strong>Every row has a source.</strong>
+            A receipt, a statement, or a dashboard. If a number can&rsquo;t be sourced, it doesn&rsquo;t go in.</p>
+          </li>
+          <li>
+            <p><strong>Estimates wear an asterisk.</strong>
+            The * means an assumed rate, stated right under the table. Estimates get replaced &mdash; never quietly kept.</p>
+          </li>
+          <li>
+            <p><strong>IDR first, USD second.</strong>
+            Money is recorded in the currency it actually moved in. Totals lead in rupiah, because this is an Indonesian company.</p>
+          </li>
+          <li>
+            <p><strong>The meter doesn&rsquo;t count promises.</strong>
+            Money in the account, or the needle doesn&rsquo;t move. That&rsquo;s the whole trick.</p>
+          </li>
+        </ol>
+        <p class="section-close">
+          That&rsquo;s it. The books are open &mdash;
+          <a href="index.html#philosophy">hold us to them</a>.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <img class="footer-mark" src="assets/logo-white.png" alt="Celtaury logo" width="92" height="92">
+      <div class="footer-text">
+        <p>&copy; 2026 Celtaury &mdash; the books are open, the balance is not pretty yet.</p>
+        <p class="mono-note">no javascript &middot; no cookies &middot; no third-party requests &middot; updated by hand</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
